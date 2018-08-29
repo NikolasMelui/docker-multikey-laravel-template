@@ -37,3 +37,5 @@ RUN apt-get update && apt-get install -y \
   --with-vpx-dir=/usr/lib/x86_64-linux-gnu/
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
+
+CMD ["php-fpm"]
