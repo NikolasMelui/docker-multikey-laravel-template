@@ -19,13 +19,14 @@ services:
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ./src:/var/www/html
   db:
-    image: postgres:10.1
-    restart: unless-stopped
+    image: mariadb:10.1
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_NAME}
+      - MYSQL_PASSWORD=${DB_NAME}
     ports:
-      - 5432:5432
+      - 33060:3306
     volumes:
-      - ./.docker/postgres/:/docker-entrypoint-initdb.d/
+      - mysql:/var/lib/mysql
+    restart: unless-stopped
